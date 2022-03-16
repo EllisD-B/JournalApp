@@ -23,26 +23,48 @@ public class ResourceService {
         return repository.findAll();
     }
 
+    public Optional<Resource> getResourceById(long id) {
+        return repository.findById(id);
+    }
+
+    public Optional<Resource> getResourceByName(Resource r) {
+        return repository.findResourceByName(r.getResourceName());
+    }
+
     public Optional<Resource> saveResource(Resource r) {
-        Optional<Resource> resource = repository.findResourceByName(r.getName());
+        Optional<Resource> resource = repository.findResourceByName(r.getResourceName());
 
         if(resource.isPresent()) {
-            log.error("Resource with name {} already present, cannot save", r.getName());
+            log.error("Resource with name {} already present, cannot save", r.getResourceName());
             return Optional.empty();
         }
 
+        log.info("Resource with name {} being created", r.getResourceName());
         return Optional.of(repository.save(r));
     }
 
+    public Optional<Resource> updateResource(Resource r) {
+        Optional<Resource> resource = repository.findById(r.getId());
+
+        if(resource.isPresent()) {
+            repository.updateResource(r.getResourceName(), r.getResourceUrl(), resource.get().getId());
+            log.info("resource successfully updated");
+            return Optional.of(r);
+        }
+
+        log.error("Resource with name {} not found", r.getResourceName());
+        return Optional.empty();
+    }
+
     public QueryStatus deleteResource(Resource r) {
-        Optional<Resource> resource = repository.findResourceByName(r.getName());
-        QueryStatus status;
+        Optional<Resource> resource = repository.findResourceByName(r.getResourceName());
 
         if(resource.isEmpty()) {
-            log.error("Resource with name {} does not exist", r.getName());
+            log.error("Resource with name {} does not exist", r.getResourceName());
             return QueryStatus.FAILURE;
         }
         repository.delete(r);
+        log.info("Successfully deleted resource");
         return QueryStatus.SUCCESS;
     }
 }

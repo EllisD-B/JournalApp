@@ -1,13 +1,17 @@
 package com.journalapp.ellis.journalapp.Model;
 
 public enum QueryStatus {
-    SUCCESS("success"),
 
+    SUCCESS("success"),
     FAILURE("failure");
 
-    private final String id;
+    private final String status;
 
-    QueryStatus(String id) {
-        this.id = id;
+    QueryStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.Entity;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +14,10 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CallbackRequest {
 
-    @JsonProperty("data")
-    private List<Resource> data;
+    @JsonProperty("id")
+    private String id;
 
-    @JsonProperty("event_id")
-    private String eventId;
+    public String getId() {
+        return this.id;
+    }
 }

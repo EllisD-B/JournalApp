@@ -5,23 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
 @Table(name = "resource")
-@Builder
 public class Resource {
 
-    @JsonProperty("Name")
-    private String name;
+    @JsonProperty("name")
+    @Column(name = "resource_name")
+    private String resourceName;
 
     @JsonProperty("url")
-    private String url;
-
-    @JsonProperty("tags")
-    @ElementCollection
-    private List<String> tags;
+    @Column(name = "resource_url")
+    private String resourceUrl;
 
     @Id
     @SequenceGenerator(
@@ -39,17 +35,15 @@ public class Resource {
 
     }
 
-    public Resource(long id, String name, String url, List<String> tags) {
+    public Resource(long id, String name, String url) {
         this.id = id;
-        this.name = name;
-        this.url = url;
-        this.tags = tags;
+        this.resourceName = name;
+        this.resourceUrl = url;
     }
 
-    public Resource(String name, String url, List<String> tags) {
-        this.name = name;
-        this.url = url;
-        this.tags = tags;
+    public Resource(String name, String url) {
+        this.resourceName = name;
+        this.resourceUrl = url;
     }
 
     public Long getId() {
@@ -60,40 +54,27 @@ public class Resource {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getResourceName() {
+        return resourceName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setResourceName(String name) {
+        this.resourceName = name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getResourceUrl() {
+        return resourceUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    public void addTag(String tag) {
-        this.tags.add(tag);
+    public void setResourceUrl(String url) {
+        this.resourceUrl = url;
     }
 
     @Override
     public String toString() {
         return "Resource{" +
-                "name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", tags=" + tags +
+                "name='" + resourceName + '\'' +
+                ", url='" + resourceUrl + '\'' +
                 ", id=" + id +
                 '}';
     }
