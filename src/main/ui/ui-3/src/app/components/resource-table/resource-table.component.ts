@@ -27,7 +27,10 @@ export class resourceTableComponent implements OnDestroy {
   currentResource: any;
   resourcesCount = 0;
   isCollapsedArray = Array<boolean>();
+  isCollapsedArray2 = Array<boolean>();
   isCollapsed = false;
+  isCollapsed2 = false;
+  isYes = false;
   @Input() refresh: boolean;
 
   dropdownList = Array<SelectItem>();
@@ -45,6 +48,7 @@ export class resourceTableComponent implements OnDestroy {
   setCollapsed() {
     for(let i = 0; i < this.resources.length; i++) {
       this.isCollapsedArray[i] = true;
+      this.isCollapsedArray2[i] = true;
     }
   }
 

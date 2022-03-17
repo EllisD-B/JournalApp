@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientTestingModule
       ],
       declarations: [
         AppComponent
@@ -20,16 +22,25 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-bootstrap'`, () => {
+  it(`should have as title 'journalUi'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-bootstrap');
+    expect(app.title).toEqual('journalUi');
   });
 
-  it('should render title', () => {
+  it('should render navbar', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-bootstrap app is running!');
+    const navbar = compiled.querySelector('navbar');
+    expect(navbar).toBeTruthy();
   });
+
+  it('should render resource table', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const resourceTable = compiled.querySelector('resource-table');
+    expect(resourceTable).toBeTruthy();
+  })
 });
