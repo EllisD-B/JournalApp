@@ -4,6 +4,7 @@ import com.journalapp.ellis.journalapp.Model.CallbackResponse;
 import com.journalapp.ellis.journalapp.Model.QueryStatus;
 import com.journalapp.ellis.journalapp.Model.Resource;
 import com.journalapp.ellis.journalapp.Service.ResourceService;
+import com.journalapp.ellis.journalapp.Service.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ public class ResourceController {
     public ResponseEntity<?> getResources() {
         log.info("Received callback request to get resources, processing...");
         List<Resource> resources = resourceService.getResources();
+        resources.forEach(resource -> resource.setTags(Utils.removeTrailingComma(resource.getTags())));
         CallbackResponse response = CallbackResponse.builder().data(resources).build();
 
         return ResponseEntity.ok(response);
@@ -71,6 +73,19 @@ public class ResourceController {
                 .build()));
     }
 
+    @GetMapping("/filter-by-tags")
+    public ResponseEntity<?> filterByTags(
+            @RequestParam String tags
+    )  {
+
+        List<String> splitTags = Utils.delimitTags(tags);
+        List<Resource> resources = resourceService.filterByTags(splitTags);
+
+        return ResponseEntity.ok(CallbackResponse.builder()
+                .data(resources)
+                .build());
+    }
+
     @PostMapping("/new-resource")
     public ResponseEntity<?> createResource(
             @RequestBody Resource resource
@@ -86,6 +101,22 @@ public class ResourceController {
                 .errors(List.of("Already a resource with that name."))
                 .build()));
 
+    }
+
+    @PostMapping("/new-resource-tags")
+    public ResponseEntity<?> createResourceWithTags(
+            @RequestBody Resource resource
+    ) {
+        log.info("Received callback request to add new resource with tags, processing...");
+        Optional<Resource> r = resourceService.saveResource(resource);
+
+        return r.map(value -> ResponseEntity.ok(CallbackResponse
+                .builder()
+                .data(List.of(value))
+                .build())).orElseGet(() -> ResponseEntity.ok(CallbackResponse
+                .builder()
+                .errors(List.of("Already a resource with that name."))
+                .build()));
     }
 
     @DeleteMapping("/remove-resource")

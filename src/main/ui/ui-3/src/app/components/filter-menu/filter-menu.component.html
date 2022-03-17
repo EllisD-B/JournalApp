@@ -1,0 +1,23 @@
+<p>
+  <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+    Filter By Tag
+  </button>
+</p>
+<div id="collapseExample" class="justify-content-end" [ngbCollapse]="isCollapsed">
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="filterMenuForm" (ngSubmit)="onSubmit()">
+        <div class="form-group" style="z-index:10;">
+          <label for="exampleTags">Tags</label>
+          <ng-multiselect-dropdown id="exampleTags" formControlName="tags" [placeholder]="'e.g. Java'" [settings]="dropdownSettings" [(ngModel)]="selectedItems" [data]="dropdownList"></ng-multiselect-dropdown>
+          <small id="tags23" class="form-text text-muted">Select the tags you wish to filter by</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

@@ -3,7 +3,10 @@ package com.journalapp.ellis.journalapp.Service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class UtilsTest {
 
@@ -15,5 +18,14 @@ public class UtilsTest {
 
         long l = Utils.getId(json);
         Assertions.assertEquals(1, l);
+    }
+
+    @Test
+    public void shouldCorrectlyDelimitTags() {
+        String toDelim = "Java, Python, Ruby,";
+
+        List<String> tags = Utils.delimitTags(toDelim);
+        assertThat(tags).hasSize(3).contains("Java", "Python", "Ruby");
+
     }
 }

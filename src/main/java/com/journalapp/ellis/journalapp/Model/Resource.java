@@ -19,6 +19,18 @@ public class Resource {
     @Column(name = "resource_url")
     private String resourceUrl;
 
+    @JsonProperty("tags")
+    @Column(name = "resource_tags")
+    private String tags;
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
     @Id
     @SequenceGenerator(
             name="resource_sequence",
@@ -44,6 +56,19 @@ public class Resource {
     public Resource(String name, String url) {
         this.resourceName = name;
         this.resourceUrl = url;
+    }
+
+    public Resource(String name, String url, String tags) {
+        this.resourceName = name;
+        this.resourceUrl = url;
+        this.tags = tags;
+    }
+
+    public Resource(long id, String name, String url, String tags) {
+        this.id = id;
+        this.resourceName = name;
+        this.resourceUrl = url;
+        this.tags = tags;
     }
 
     public Long getId() {

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = JournalAppApplication.class)
@@ -40,8 +41,8 @@ public class ResourceServiceTest {
 
     @BeforeEach
     public void setUp() {
-        youtube = new Resource("Youtube", "https://www.youtube.com/");
-        codeAcademy = new Resource("Codeacademy", "https://www.codecademy.com/");
+        youtube = new Resource("Youtube", "https://www.youtube.com/", "Java");
+        codeAcademy = new Resource("Codeacademy", "https://www.codecademy.com/", "Python");
         storedResources.add(youtube);
         storedResources.add(codeAcademy);
         newData = new Resource( "Udemy", "https://www.udemy.com");
@@ -95,7 +96,7 @@ public class ResourceServiceTest {
 
     @Test
     public void shouldUpdateResourceWhenPresent() {
-        Resource update = new Resource(youtube.getId(), "YT", "yt.com");
+        Resource update = new Resource(youtube.getId(), "YT", "yt.com", "Java");
         resourceService.updateResource(update);
 
         assertTrue(repository.findById(youtube.getId()).isPresent());
@@ -108,5 +109,29 @@ public class ResourceServiceTest {
         Optional<Resource> updated = resourceService.updateResource(notPresent);
 
         assertTrue(updated.isEmpty());
+    }
+
+    @Test
+    public void filterShouldReturnCorrectListWhenCalled() {
+        List<String> tags = List.of("Java");
+
+        List<Resource> resources = resourceService.filterByTags(tags);
+
+        assertThat(resources).hasSize(1).contains(youtube);
+    }
+
+    @Test
+    public void filterShouldReturnLargerListWithBiggerData() {
+        List<String> tags = List.of("Java", "Testing");
+        Resource jt1 = new Resource("Jt1", "jt1.co.uk", "Java, Testing");
+        Resource jt2 = new Resource("jt2", "jt2.co.uk", "Java, Testing");
+        Resource jt3 = new Resource("jtd3", "jtd3.co.uk", "Testing, Databases");
+        Resource jt4 = new Resource("jt4", "jt4.co.uk", "Java, Testing, Databases");
+
+        repository.saveAll(List.of(jt1, jt2, jt3, jt4));
+
+        List<Resource> resources = resourceService.filterByTags(tags);
+
+        assertThat(resources).hasSize(3).contains(jt1, jt2, jt4);
     }
 }

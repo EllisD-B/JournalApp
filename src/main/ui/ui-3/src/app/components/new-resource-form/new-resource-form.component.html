@@ -9,8 +9,10 @@
     <input type="text" formControlName="url" class="form-control" id="exampleInputPassword1" placeholder="Enter Resource Url">
     <small id="urlHelp" class="form-text text-muted">Enter the url of the resource here</small>
   </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+  <div class="form-group">
+    <label for="exampleTags">Tags</label>
+    <ng-multiselect-dropdown id="exampleTags" formControlName="tags" [placeholder]="'e.g. Java'" [settings]="dropdownSettings" [(ngModel)]="selectedItems" [data]="dropdownList"></ng-multiselect-dropdown>
+    <small id="tagsHelp" class="form-text text-muted">Select up to 3 applicable tags</small>
   </div>
   <button type="submit" [disabled]="!resourceForm.valid" class="btn btn-primary">Submit</button>
 </form>

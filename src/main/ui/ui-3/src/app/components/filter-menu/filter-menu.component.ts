@@ -1,10 +1,7 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {AppService} from "./app.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
+import {AppService} from "../../app.service";
 import {Subject, takeUntil} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 interface SelectItem {
   id: number;
@@ -12,18 +9,13 @@ interface SelectItem {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
+  selector: 'filter-menu',
+  templateUrl: 'filter-menu.component.html',
+  styleUrls: ['filter-menu.component.css']
+  }
+)
 
-export class AppComponent implements OnDestroy, OnInit {
-
-  constructor(private appService: AppService) {}
-
-  title = 'journalUi';
-
-  public isCollapsed = false;
+export class filterMenuComponent implements OnInit {
 
   dropdownList = Array<SelectItem>();
 
@@ -31,34 +23,37 @@ export class AppComponent implements OnDestroy, OnInit {
 
   dropdownSettings = {};
 
-  resources: Array<any> = [];
-  public refresh = false;
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  isCollapsed = true;
+  resources: any;
 
   filterMenuForm = new FormGroup({
     tags: new FormControl('')
   })
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(private appService: AppService) {
+  }
 
   onSubmit() {
     console.log(this.filterMenuForm.get('tags')?.value);
     let tagString = '';
     for(let i = 0; i < this.filterMenuForm.get('tags')?.value.length; i++) {
       tagString = tagString.concat(this.filterMenuForm.get('tags')?.value[i].tag + ', ');
+      console.log(tagString)
     }
 
-    return tagString;
-  }
-
-  getAllResources() {
-
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe()
+    this.appService.filterResourcesByTags(tagString)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((resources: any=[]) => {
+        console.log('message::::', resources);
+        this.resources = resources.data;
+      }
+    )
   }
 
   ngOnInit() {
+
     this.dropdownList = [
       { id: 1, tag: 'Java' },
       { id: 2, tag: 'Python' },
@@ -82,5 +77,4 @@ export class AppComponent implements OnDestroy, OnInit {
         limitSelection: 3
       };
   }
-
 }

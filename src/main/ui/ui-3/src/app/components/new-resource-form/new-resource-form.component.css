@@ -1,0 +1,7 @@
+:host ::ng-deep .multiselect-dropdown .selected-item {
+  background: #0d6efd;
+}
+
+.multiselect-dropdown {
+  overflow-x: visible !important;
+}

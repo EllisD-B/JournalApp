@@ -16,8 +16,23 @@ export class AppService {
     return this.http.get(this.rootURL + '/resources')
   }
 
+  filterResourcesByTags(tags: any) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      params: {tags: tags}
+    }
+
+    return this.http.get(this.rootURL + '/filter-by-tags', options);
+  }
+
   addResource(resource: any) {
     return this.http.post(this.rootURL + '/new-resource', resource);
+  }
+
+  addResourceWithTags(resource: any, tags: string) {
+    return this.http.post(this.rootURL + '/new-resource-tags', resource)
   }
 
   removeResource(resource: any) {

@@ -152,7 +152,7 @@ public class ResourceControllerTest {
         verify(mockResourceService, times(1)).updateResource(newData);
     }
 
-    private String convertToJson(Resource resource) throws JsonProcessingException {
+    private String convertToJson(Object resource) throws JsonProcessingException {
         ObjectWriter ow = objectMapper.writer().withDefaultPrettyPrinter();
         return ow.writeValueAsString(resource);
     }

@@ -13,5 +13,11 @@
     <br>
     <small id="urlHelp" class="form-text text-muted"> or leave blank to use current url</small>
   </div>
+  <div class="form-group" style="z-index:10;">
+    <label for="exampleTags">Tags</label>
+    <ng-multiselect-dropdown id="exampleTags" formControlName="tags" [placeholder]="'e.g. Java'" [settings]="dropdownSettings" [(ngModel)]="selectedItems" [data]="dropdownList"></ng-multiselect-dropdown>
+    <small id="tagsHelp" class="form-text text-muted">Select applicable tags</small>
+    <small id="tagsHelp" class="form-text text-muted">or leave blank to use current tags</small>
+  </div>
   <button type="submit" class="btn btn-primary">Save</button>
 </form>

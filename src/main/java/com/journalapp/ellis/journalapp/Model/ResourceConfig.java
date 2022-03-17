@@ -15,11 +15,13 @@ public class ResourceConfig {
         return args -> {
             Resource youtube = new Resource(
                     "Youtube",
-                    "https://www.youtube.com/"
+                    "https://www.youtube.com/",
+                    "JS, Testing"
             );
             Resource codeAcademy = new Resource(
                     "Codeacademy",
-                    "https://www.codecademy.com/"
+                    "https://www.codecademy.com/",
+                    "Python, Databases"
             );
 
             repository.saveAll(List.of(youtube, codeAcademy));

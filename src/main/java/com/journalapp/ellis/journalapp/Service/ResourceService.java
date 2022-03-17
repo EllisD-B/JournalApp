@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Component
 @Slf4j
@@ -29,6 +30,20 @@ public class ResourceService {
 
     public Optional<Resource> getResourceByName(Resource r) {
         return repository.findResourceByName(r.getResourceName());
+    }
+
+    public List<Resource> filterByTags(List<String> tags) {
+
+        List<Resource> all = repository.findAll();
+
+        Predicate<Resource> containsAllTags = resource -> tags
+                .stream()
+                .allMatch(resource.getTags()::contains);
+
+        return all.stream()
+                .filter(containsAllTags)
+                .toList();
+
     }
 
     public Optional<Resource> saveResource(Resource r) {
