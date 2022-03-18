@@ -5,8 +5,11 @@
   <!--  </button>-->
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <a class="navbar-brand" href="https://www.solirius.com/">
+      <img src="assets/soliriuslogo.png" width="90" height="30"  alt="logo">
+    </a>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item active d-inline-block align-top">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <!--      <li class="nav-item">-->
@@ -23,22 +26,20 @@
       <!--          <a class="dropdown-item" href="#">Something else here</a>-->
       <!--        </div>-->
       <!--      </li>-->
-      <li>
-        <p>
-          <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
-                  [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-            Create New Resource
-          </button>
-        </p>
-        <div id="collapseExample" class="justify-content-end" [ngbCollapse]="isCollapsed">
-          <div class="card">
-            <div class="card-body">
-              <new-resource-form (getAllResourcesEvent)="submitEvent()"></new-resource-form>
-            </div>
-          </div>
-        </div>
-      </li>
     </ul>
+    <p class="ms-auto">
+      <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+              [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+        Create New Resource
+      </button>
+    </p>
+    <div id="collapseExample" class="justify-content-end" [ngbCollapse]="isCollapsed">
+      <div class="card">
+        <div class="card-body">
+          <new-resource-form (getAllResourcesEvent)="submitEvent()"></new-resource-form>
+        </div>
+      </div>
+    </div>
     <!--    <form class="form-inline my-2 my-lg-0" style="">-->
     <!--      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
     <!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->

@@ -1,49 +1,33 @@
-<!--<p>-->
-<!--  <button id="customTag" type="button" class="btn btn-outline-primary" (click)="isCollapsed2 = !isCollapsed2"-->
-<!--          [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseExample">-->
-<!--    Add custom tag-->
-<!--  </button>-->
-<!--</p>-->
-<!--<div id="collapseExample2" class="justify-content-end" [ngbCollapse]="!isCollapsed2">-->
-<!--  <div class="card">-->
-<!--    <div class="card-body">-->
-<!--      <form [formGroup]="customTagForm" (ngSubmit)="createCustomTag()">-->
-<!--        <div class="form-group" style="z-index:10;">-->
-<!--          <label for="customTagInput">Tags</label>-->
-<!--          <input type="email" formControlName="tag" class="form-control" id="customTagInput" aria-describedby="emailHelp" placeholder="Enter Custom Tag">-->
-<!--          <small id="tags23" class="form-text text-muted">Add Custom topic tag to list</small>-->
-<!--        </div>-->
-<!--        <button type="submit" class="btn btn-primary" (click)="isCollapsed2 = !isCollapsed2; createCustomTag()">Add Tag</button>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 
-<p>
-  <button id="filterButton" type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-    Filter By Tag
-  </button>
-</p>
-<div id="collapseExample2" class="justify-content-end" [ngbCollapse]="!isCollapsed">
-  <div class="card">
-    <div class="card-body">
-      <form [formGroup]="filterMenuForm" (ngSubmit)="onSubmit()">
-        <div class="form-group" style="z-index:10;">
-          <label for="exampleTags">Tags</label>
-          <ng-multiselect-dropdown id="exampleTags" formControlName="tags" [placeholder]="'e.g. Java'" [settings]="dropdownSettings" [(ngModel)]="selectedItems" [data]="dropdownList"></ng-multiselect-dropdown>
-          <small id="tags23" class="form-text text-muted">Select the tags you wish to filter by</small>
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="isCollapsed = !isCollapsed; onSubmit()">Filter</button>
-      </form>
+<div id="container">
+  <p class="child">
+    <button id="filterButton" type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+      Filter By Tag
+    </button>
+  </p>
+  <div id="collapseExample2" class="justify-content-end" [ngbCollapse]="!isCollapsed">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="filterMenuForm" (ngSubmit)="onSubmit()">
+          <div class="form-group" style="z-index:10;">
+            <label for="exampleTags">Tags</label>
+            <ng-multiselect-dropdown id="exampleTags" formControlName="tags" [placeholder]="'e.g. Java'" [settings]="dropdownSettings" [(ngModel)]="selectedItems" [data]="dropdownList"></ng-multiselect-dropdown>
+            <small id="tags23" class="form-text text-muted">Select the tags you wish to filter by</small>
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="isCollapsed = !isCollapsed; onSubmit()">Filter</button>
+        </form>
+      </div>
     </div>
   </div>
+
+  <p class="child">
+    <button id="allResourcesButton" type="button" class="btn btn-outline-primary" (click)="getAllResources()">
+      Clear Filters
+    </button>
+  </p>
 </div>
-<p>
-  <button id="allResourcesButton" type="button" class="btn btn-outline-primary" (click)="getAllResources()">
-    Clear Filters
-  </button>
-</p>
+
 <h2>Your Resources</h2>
 <table class="table table-striped">
   <thead>

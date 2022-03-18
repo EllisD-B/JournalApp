@@ -13,3 +13,20 @@ tr {
 td {
   background: white;
 }
+
+/*#container {*/
+/*  border: 1px solid red; !** for viewing purposes **!*/
+/*  text-align: center; !** center the divs **!*/
+/*  font-size: 0; !** remove the unwanted space caused by display: inline-block in .child **!*/
+/*}*/
+
+/*#container .child {*/
+/*  display: inline-block; !** set the divs side-by-side **!*/
+/*  vertical-align: top;*/
+/*  width: 20px;*/
+/*  height: 100px;*/
+/*  font-size: 12px; !** override font-size: 0 of #container, so that text will be visible again **!*/
+/*  text-align: left; !** set text in the .child divs back to normal alignment **!*/
+/*  border: 1px solid blue; !** for viewing purposes **!*/
+/*  box-sizing: border-box;*/
+/*}*/
