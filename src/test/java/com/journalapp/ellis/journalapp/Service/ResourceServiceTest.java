@@ -33,7 +33,6 @@ public class ResourceServiceTest {
     private ResourceRepository repository;
 
     private Resource youtube;
-    private Resource codeAcademy;
 
     private Resource newData;
 
@@ -42,7 +41,7 @@ public class ResourceServiceTest {
     @BeforeEach
     public void setUp() {
         youtube = new Resource("Youtube", "https://www.youtube.com/", "Java");
-        codeAcademy = new Resource("Codeacademy", "https://www.codecademy.com/", "Python");
+        Resource codeAcademy = new Resource("Codeacademy", "https://www.codecademy.com/", "Python");
         storedResources.add(youtube);
         storedResources.add(codeAcademy);
         newData = new Resource( "Udemy", "https://www.udemy.com");
@@ -105,7 +104,7 @@ public class ResourceServiceTest {
 
     @Test
     public void updateShouldReturnEmptyOptionalWhenNotPresent() {
-        Resource notPresent = new Resource(100, "asndasj", "ashdiuawhdiu.com");
+        Resource notPresent = new Resource(100, "notPresent", "notPresent.com");
         Optional<Resource> updated = resourceService.updateResource(notPresent);
 
         assertTrue(updated.isEmpty());
@@ -121,7 +120,7 @@ public class ResourceServiceTest {
     }
 
     @Test
-    public void filterShouldReturnLargerListWithBiggerData() {
+    public void filterShouldReturnResourcesWithGivenTags() {
         List<String> tags = List.of("Java", "Testing");
         Resource jt1 = new Resource("Jt1", "jt1.co.uk", "Java, Testing");
         Resource jt2 = new Resource("jt2", "jt2.co.uk", "Java, Testing");

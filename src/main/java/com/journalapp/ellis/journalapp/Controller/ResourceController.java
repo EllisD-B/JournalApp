@@ -26,7 +26,7 @@ public class ResourceController {
     public ResponseEntity<?> getResources() {
         log.info("Received callback request to get resources, processing...");
         List<Resource> resources = resourceService.getResources();
-        resources.forEach(resource -> resource.setTags(Utils.removeTrailingComma(resource.getTags())));
+        resources.forEach(resource -> resource.setTags(Utils.removeTrailingComma(resource.getTags() == null ? " " : resource.getTags())));
         CallbackResponse response = CallbackResponse.builder().data(resources).build();
 
         return ResponseEntity.ok(response);

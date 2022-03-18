@@ -3,7 +3,7 @@ import {AppService} from "../../app.service";
 import {Observable, Subject} from "rxjs";
 import {switchMap, takeUntil} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 interface SelectItem {
   id: number;
@@ -45,6 +45,10 @@ export class resourceTableComponent implements OnDestroy {
     tags: new FormControl('')
   })
 
+  customTagForm = new FormGroup({
+    tag: new FormControl('', Validators.required)
+  })
+
   setCollapsed() {
     for(let i = 0; i < this.resources.length; i++) {
       this.isCollapsedArray[i] = true;
@@ -60,14 +64,11 @@ export class resourceTableComponent implements OnDestroy {
         (resources: any=[]) => {
           this.resourcesCount = resources.data.length;
           this.resources = resources.data;
-          console.log('Get all resources: ')
-          console.log(resources)
         }
       )
   }
 
   onSubmit() {
-    console.log(this.filterMenuForm.get('tags')?.value);
     let tagString = '';
     for(let i = 0; i < this.filterMenuForm.get('tags')?.value.length; i++) {
       tagString = tagString.concat(this.filterMenuForm.get('tags')?.value[i].tag + ', ');
@@ -79,10 +80,18 @@ export class resourceTableComponent implements OnDestroy {
       this.appService.filterResourcesByTags(tagString)
         .pipe(takeUntil(this.destroy$))
         .subscribe((resources: any=[]) => {
-          console.log('message::::', resources);
           this.resources = resources.data;
         });
     }
+  }
+
+  createCustomTag() {
+    let id = (this.dropdownList[this.dropdownList.length-1].id) + 1;
+    let name = this.customTagForm.get('tag')?.value;
+    let newSelectItem : SelectItem = {id: id, tag : name};
+    console.log(newSelectItem)
+    this.dropdownList.push(newSelectItem);
+    this.customTagForm.reset();
   }
 
   filterResources(tags: any) {

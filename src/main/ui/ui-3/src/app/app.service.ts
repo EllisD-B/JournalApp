@@ -31,7 +31,7 @@ export class AppService {
     return this.http.post(this.rootURL + '/new-resource', resource);
   }
 
-  addResourceWithTags(resource: any, tags: string) {
+  addResourceWithTags(resource: any) {
     return this.http.post(this.rootURL + '/new-resource-tags', resource)
   }
 

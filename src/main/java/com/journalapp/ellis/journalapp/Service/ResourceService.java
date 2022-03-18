@@ -34,6 +34,8 @@ public class ResourceService {
 
     public List<Resource> filterByTags(List<String> tags) {
 
+        log.info("About to start filtering via tags...");
+
         List<Resource> all = repository.findAll();
 
         Predicate<Resource> containsAllTags = resource -> tags

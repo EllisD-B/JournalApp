@@ -14,10 +14,8 @@ public class GetResourceFunctionalTest extends BaseFunctionalTest {
     //see ResourceConfig for resource to return
     public void shouldReturnResource_whenGivenValidExistingId() {
         String id = "1";
-        Resource expectedResponse = new Resource(1, "Youtube", "https://www.youtube.com/");
-
-        ResponseEntity<CallbackResponse> responseEntity = (ResponseEntity<CallbackResponse>) controller.getResourceById(id);
-        CallbackResponse response = responseEntity.getBody();
+        Resource expectedResponse = new Resource(1, "Youtube", "https://www.youtube.com/", "JS, Testing");
+        CallbackResponse response = ((ResponseEntity<CallbackResponse>) controller.getResourceById(id)).getBody();
 
         assertNotNull(response);
 

@@ -33,7 +33,7 @@ abstract class BaseFunctionalTest {
     ResourceController controller;
 
     List<Resource> resources = new ArrayList<>(List.of(
-            new Resource(1,"Youtube", "https://www.youtube.com/"),
-            new Resource(2, "Codeacademy", "https://www.codecademy.com/")));
+            new Resource(1,"Youtube", "https://www.youtube.com/", "JS, Testing"),
+            new Resource(2, "Codeacademy", "https://www.codecademy.com/", "Python, Databases")));
 
 }

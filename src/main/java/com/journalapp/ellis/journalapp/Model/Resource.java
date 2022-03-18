@@ -23,14 +23,6 @@ public class Resource {
     @Column(name = "resource_tags")
     private String tags;
 
-    public String getTags() {
-        return tags;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
     @Id
     @SequenceGenerator(
             name="resource_sequence",
@@ -93,6 +85,14 @@ public class Resource {
 
     public void setResourceUrl(String url) {
         this.resourceUrl = url;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     @Override
