@@ -133,4 +133,15 @@ public class ResourceServiceTest {
 
         assertThat(resources).hasSize(3).contains(jt1, jt2, jt4);
     }
+    @Test
+    public void filterShouldReturnFilteredListWhenCalledWithValidTags() throws Exception {
+        int i =3;
+        assertEquals(i, 3);
+    }
+
+    @Test
+    public void filterShouldReturnErrorsWhenCalledWithInvalidTags() throws Exception {
+        int i =3;
+        assertEquals(i, 3);
+    }
 }

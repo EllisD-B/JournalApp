@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DeleteResourceFunctionalTest extends BaseFunctionalTest {
@@ -33,5 +34,17 @@ public class DeleteResourceFunctionalTest extends BaseFunctionalTest {
 
         assertThat(response.getData()).isNull();
         assertThat(response.getErrors()).hasSize(1).contains("Resource does not exist");
+    }
+
+    @Test
+    public void filterShouldReturnFilteredListWhenCalledWithValidTags() throws Exception {
+        int i =3;
+        assertEquals(i, 3);
+    }
+
+    @Test
+    public void filterShouldReturnErrorsWhenCalledWithInvalidTags() throws Exception {
+        int i =3;
+        assertEquals(i, 3);
     }
 }

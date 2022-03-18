@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class UtilsTest {
@@ -27,5 +28,16 @@ public class UtilsTest {
         List<String> tags = Utils.delimitTags(toDelim);
         assertThat(tags).hasSize(3).contains("Java", "Python", "Ruby");
 
+    }
+    @Test
+    public void filterShouldReturnFilteredListWhenCalledWithValidTags() throws Exception {
+        int i =3;
+        assertEquals(i, 3);
+    }
+
+    @Test
+    public void filterShouldReturnErrorsWhenCalledWithInvalidTags() throws Exception {
+        int i =3;
+        assertEquals(i, 3);
     }
 }

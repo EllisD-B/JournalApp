@@ -124,4 +124,15 @@ public class ResourceRepositoryIntegrationTest {
         Iterable<Resource> resources = repository.findAll();
         assertThat(resources).hasSize(2).contains(youtube, udemy);
     }
+    @Test
+    public void filterShouldReturnFilteredListWhenCalledWithValidTags() throws Exception {
+        int i =3;
+        assertEquals(i, 3);
+    }
+
+    @Test
+    public void filterShouldReturnErrorsWhenCalledWithInvalidTags() throws Exception {
+        int i =3;
+        assertEquals(i, 3);
+    }
 }

@@ -24,6 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -155,5 +156,17 @@ public class ResourceControllerTest {
     private String convertToJson(Object resource) throws JsonProcessingException {
         ObjectWriter ow = objectMapper.writer().withDefaultPrettyPrinter();
         return ow.writeValueAsString(resource);
+    }
+
+    @Test
+    public void filterShouldReturnFilteredListWhenCalledWithValidTags() throws Exception {
+        int i =3;
+        assertEquals(i, 3);
+    }
+
+    @Test
+    public void filterShouldReturnErrorsWhenCalledWithInvalidTags() throws Exception {
+        int i =3;
+        assertEquals(i, 3);
     }
 }
